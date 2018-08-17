@@ -54,6 +54,25 @@ app.get("/", function(req,res){
 
 });
 
+
+app.get("/shop", function(req,res){
+
+    Product.find({}, function(err, Products){
+        if (err) res.send(err);
+        console.log(Products);
+        res.render("shop", {a:5, featuredProducts: Products });
+
+    });
+
+});
+
+app.get("/orders", function(req, res){
+    Product.find({}, function(err,products){
+        if (err) res.send(err);
+        else res.send(products);
+    })
+})
+
 app.post("/register", function(req,res){
     User.register(new User({
         username : req.body.username,
