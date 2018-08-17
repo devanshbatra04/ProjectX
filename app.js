@@ -11,7 +11,7 @@ mongoose.connect("mongodb://lifeisgood:lifeisgood123@ds125402.mlab.com:25402/lif
 
 
 var app = express();
-app.use('/public', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -37,8 +37,13 @@ app.get("/register", function(req, res){
     res.render("register");
 });
 
-app.get("/", function(req,res){
+app.get("/check", function(req,res){
     res.render("home");
+});
+
+
+app.get("/", function(req,res){
+    res.render("index");
 });
 
 app.post("/register", function(req,res){
