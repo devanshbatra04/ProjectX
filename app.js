@@ -5,7 +5,8 @@ const express                = require('express'),
     localStrategy            = require('passport-local'),
     passportLocalMongoose    = require('passport-local-mongoose');
 
-var User = require('./models/user');
+var User = require('./models/user'),
+    Product = require('./models/products');
 
 mongoose.connect("mongodb://lifeisgood:lifeisgood123@ds125402.mlab.com:25402/lifeisgood");
 
@@ -43,7 +44,14 @@ app.get("/check", function(req,res){
 
 
 app.get("/", function(req,res){
-    res.render("index");
+
+    Product.find({}, function(err, Products){
+        if (err) res.send(err);
+        console.log(Products);
+        res.render("index", {a:5, featuredProducts: Products });
+
+    });
+
 });
 
 app.post("/register", function(req,res){
@@ -76,6 +84,7 @@ app.post('/api/login', function(req,res){
 });
 
 app.post("/api/register", function(req,res){
+    console.log(req.body);
     User.register(new User({
         username : req.body.username,
         email : req.body.email,
