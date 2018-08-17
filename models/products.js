@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     Category : String,
     url: String,
     rating: Number,
-    featured: Boolean
+    featured: Boolean,
+    title: String
 });
 
 

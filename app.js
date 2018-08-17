@@ -45,7 +45,7 @@ app.get("/check", function(req,res){
 
 app.get("/", function(req,res){
 
-    Product.find({}, function(err, Products){
+    Product.find({featured: true}, function(err, Products){
         if (err) res.send(err);
         console.log(Products);
         res.render("index", {a:5, featuredProducts: Products });
@@ -60,7 +60,7 @@ app.get("/shop", function(req,res){
     Product.find({}, function(err, Products){
         if (err) res.send(err);
         console.log(Products);
-        res.render("shop", {a:5, featuredProducts: Products });
+        res.render("shop", {a:5, Products });
 
     });
 
