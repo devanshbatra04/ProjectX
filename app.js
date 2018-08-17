@@ -145,6 +145,10 @@ app.get("/logout",function(req,res){
     res.redirect("/");
 });
 
+app.get("/product/:id", function(req, res){
+    res.render('productView');
+})
+
 function ensureLoggedIn() {
     return function(req, res, next) {
         // isAuthenticated is set by `deserializeUser()`
