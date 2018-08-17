@@ -60,6 +60,36 @@ app.post("/register", function(req,res){
     console.log("Posted");
 });
 
+app.post('/api/login', function(req,res){
+    console.log(req.body);
+    passport.authenticate("local")(req,res, function(){
+        res.status(200).send(req.user);
+    })
+
+});
+
+app.post("/api/register", function(req,res){
+    User.register(new User({
+        username : req.body.username,
+        email : req.body.email,
+        name: req.body.name,
+        phoneNumber: req.body.phone,
+        MobVerified: false,
+        OTP : Math.floor(Math.random() * 100000)
+    }), req.body.password, function(err, user){
+        if (err){
+            res.status(400).send(err);
+        }
+        else {
+            console.log("user registered");
+            passport.authenticate("local")(req,res, function(){
+                // sendSMS(req.user.phoneNumber, req.user.OTP);
+                res.status(200).send(req.user);
+            })
+        }
+    });
+});
+
 app.get("/secret", function(req,res){
     res.render("secret");
 });
