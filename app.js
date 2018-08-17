@@ -154,6 +154,10 @@ app.get("/product/:id", function(req, res){
 
         }
     })
+});
+
+app.get("/checkout", function(req, res){
+    res.render('checkout');
 })
 
 function ensureLoggedIn() {
