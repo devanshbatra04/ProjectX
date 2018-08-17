@@ -66,7 +66,7 @@ app.get("/shop", function(req,res){
 
 });
 
-app.get("/orders", function(req, res){
+app.get("/products", function(req, res){
     Product.find({}, function(err,products){
         if (err) res.send(err);
         else res.send(products);
