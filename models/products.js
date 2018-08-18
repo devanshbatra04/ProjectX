@@ -10,7 +10,10 @@ var userSchema = mongoose.Schema({
     url: String,
     rating: Number,
     featured: Boolean,
-    title: String
+    title: String,
+    bigImage1: String,
+    bigImage2: String,
+    bigImage3: String
 });
 
 
