@@ -57,12 +57,14 @@ app.get("/", function(req,res){
 
 
 app.get("/shop", ensureLoggedIn(), function(req,res){
+    Cart.findOne({username: req.user.username}, function(err, cart){
+        Product.find({}, function(err, Products){
+            if (err) res.send(err);
+            res.render("shop", {cart, Products });
 
-    Product.find({}, function(err, Products){
-        if (err) res.send(err);
-        res.render("shop", {a:5, Products });
+        });    });
 
-    });
+
 
 });
 
