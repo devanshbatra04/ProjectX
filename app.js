@@ -177,7 +177,7 @@ app.get("/product/:id", function(req, res){
     })
 });
 
-app.get("/checkout", function(req, res){
+app.get("/checkout", ensureLoggedIn(), function(req, res){
     res.render('checkout');
 });
 
