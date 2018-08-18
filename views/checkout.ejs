@@ -126,62 +126,30 @@
 
     <!-- Cart Button -->
     <div class="cart-button">
-        <a href="#" id="rightSideCart"><img src="/public/img/core-img/bag.svg" alt=""> <span>3</span></a>
+        <a href="#" id="rightSideCart"><img src="/public/img/core-img/bag.svg" alt=""> <span><%= cart.items.length%></span></a>
     </div>
 
     <div class="cart-content d-flex">
 
         <!-- Cart List Area -->
         <div class="cart-list">
+            <% for (let i = 0; i < cart.items.length; i++) { %>
             <!-- Single Cart Item -->
             <div class="single-cart-item">
-                <a href="#" class="product-image">
-                    <img src="/public/img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                <a href="/public/#" class="product-image">
+                    <img src="https://static.vecteezy.com/system/resources/previews/000/104/171/non_2x/free-agro-vector.png" class="cart-thumb" alt="">
                     <!-- Cart Item Desc -->
                     <div class="cart-item-desc">
                         <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                         <span class="badge">Mango</span>
-                        <h6>Button Through Strap Mini Dress</h6>
-                        <p class="size">Size: S</p>
-                        <p class="color">Color: Red</p>
-                        <p class="price">$45.00</p>
+                        <h6><%= cart.items[i].title %></h6>
+                        <p class="price"><%= cart.items[i].price %></p>
                     </div>
                 </a>
             </div>
+            <% } %>
 
-            <!-- Single Cart Item -->
-            <div class="single-cart-item">
-                <a href="#" class="product-image">
-                    <img src="/public/img/product-img/product-2.jpg" class="cart-thumb" alt="">
-                    <!-- Cart Item Desc -->
-                    <div class="cart-item-desc">
-                        <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                        <span class="badge">Mango</span>
-                        <h6>Button Through Strap Mini Dress</h6>
-                        <p class="size">Size: S</p>
-                        <p class="color">Color: Red</p>
-                        <p class="price">$45.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Single Cart Item -->
-            <div class="single-cart-item">
-                <a href="#" class="product-image">
-                    <img src="/public/img/product-img/product-3.jpg" class="cart-thumb" alt="">
-                    <!-- Cart Item Desc -->
-                    <div class="cart-item-desc">
-                        <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                        <span class="badge">Mango</span>
-                        <h6>Button Through Strap Mini Dress</h6>
-                        <p class="size">Size: S</p>
-                        <p class="color">Color: Red</p>
-                        <p class="price">$45.00</p>
-                    </div>
-                </a>
-            </div>
         </div>
-
         <!-- Cart Summary -->
         <div class="cart-amount-summary">
 
@@ -216,19 +184,19 @@
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" value="">
+                                <input type="text" class="form-control" id="name" value=<%= user.name%>>
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="email">email <span>*</span></label>
-                                <input type="text" class="form-control" id="email" value="">
+                                <input type="text" class="form-control" id="email" value=<%= user.email%>>
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="username">Address <span>*</span></label>
-                                <input type="text" class="form-control" id="username" value="">
+                                <input type="text" class="form-control" id="username" value=<%= user.username%>>
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="phone_number">Phone No <span>*</span></label>
-                                <input type="number" class="form-control" id="phone_number" min="0" value="">
+                                <input type="number" class="form-control" id="phone_number" min="0" value=<%= user.phone %>>
                             </div>
 
                         </div>
@@ -246,10 +214,9 @@
 
                     <ul class="order-details-form mb-4">
                         <li><span>Product</span> <span>Total</span></li>
-                        <li><span>Cocktail Yellow dress</span> <span>$59.90</span></li>
-                        <li><span>Subtotal</span> <span>$59.90</span></li>
+                        <li><span>Subtotal</span> <span>Rs <%= cart.totals%></span></li>
                         <li><span>Shipping</span> <span>Free</span></li>
-                        <li><span>Total</span> <span>$59.90</span></li>
+                        <li><span>Total</span> <span>Rs <%= cart.totals%></span></li>
                     </ul>
 
                     <div id="accordion" role="tablist" class="mb-4">
@@ -279,7 +246,7 @@
                             </div>
                         </div>
 
-                    <a href="#" class="btn essence-btn">Place Order</a>
+                    <a href="http://authenticate.grubx.in/paymentForm" class="btn essence-btn">Place Order</a>
                 </div>
             </div>
         </div>
