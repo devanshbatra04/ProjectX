@@ -55,7 +55,7 @@ app.get("/", function(req,res){
 });
 
 
-app.get("/shop", function(req,res){
+app.get("/shop", ensureLoggedIn(), function(req,res){
 
     Product.find({}, function(err, Products){
         if (err) res.send(err);
@@ -134,7 +134,7 @@ app.get("/login", function(req,res){
 });
 
 app.post('/login', passport.authenticate("local", {
-    successRedirect : "/secret",
+    successRedirect : "/shop",
     failureRedirect: "/login"
 }),function(req,res){
 
