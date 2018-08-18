@@ -60,7 +60,6 @@ app.get("/shop", ensureLoggedIn(), function(req,res){
 
     Product.find({}, function(err, Products){
         if (err) res.send(err);
-        console.log(Products);
         res.render("shop", {a:5, Products });
 
     });
@@ -101,8 +100,13 @@ app.post("/register", function(req,res){
     console.log("Posted");
 });
 
+app.get("/addToCart/", ensureLoggedIn(), function(req, res){
+    Cart.find({username: req.user.username}, function(err, cart){
+        console.log(cart);
+    })
+})
+
 app.post('/api/login', function(req,res){
-    console.log(req.body);
     passport.authenticate("local")(req,res, function(){
         res.status(200).send(req.user);
     })
@@ -110,7 +114,6 @@ app.post('/api/login', function(req,res){
 });
 
 app.post("/api/register", function(req,res){
-    console.log(req.body);
     User.register(new User({
         username : req.body.username,
         email : req.body.email,
