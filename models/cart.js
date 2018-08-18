@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-    totals: Integer,
+    totals: Number,
     username: String,
     items: [{
         title: String,
-        price: Integer,
-        qty: Integer
+        price: Number,
+        qty: Number
     }]
 
 });

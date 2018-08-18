@@ -6,7 +6,8 @@ const express                = require('express'),
     passportLocalMongoose    = require('passport-local-mongoose');
 
 var User = require('./models/user'),
-    Product = require('./models/products');
+    Product = require('./models/products'),
+    Cart    = require('./models/cart');
 
 mongoose.connect("mongodb://lifeisgood:lifeisgood123@ds125402.mlab.com:25402/lifeisgood");
 
@@ -74,11 +75,17 @@ app.get("/products", function(req, res){
 })
 
 app.post("/register", function(req,res){
+    Cart.create({
+        totals: 0, username: req.body.username, items:[]
+    }, function(err, cart){
+        if (err) res.send(err);
+        else console.log(cart);
+    })
     User.register(new User({
         username : req.body.username,
         email : req.body.email,
         name: req.body.name,
-        phoneNumber: req.body.phone
+        phoneNumber: req.body.phone,
     }), req.body.password, function(err, user){
         if (err){
             console.log(err);
@@ -87,7 +94,7 @@ app.post("/register", function(req,res){
         else {
             console.log("user registered");
             passport.authenticate("local")(req,res, function(){
-                res.redirect("secret");
+                res.redirect("shop");
             })
         }
     });
@@ -158,7 +165,9 @@ app.get("/product/:id", function(req, res){
 
 app.get("/checkout", function(req, res){
     res.render('checkout');
-})
+});
+
+
 
 function ensureLoggedIn() {
     return function(req, res, next) {
