@@ -146,7 +146,7 @@ app.get("/logout",function(req,res){
 });
 
 app.get("/product/:id", function(req, res){
-    Product.findById('5b7741471f6e4f589bbc9861', function(err, product ){
+    Product.findById(req.params.id, function(err, product ){
         if (err) res.send(err);
         else {
             console.log(product);
