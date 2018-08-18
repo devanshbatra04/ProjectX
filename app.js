@@ -100,9 +100,18 @@ app.post("/register", function(req,res){
     console.log("Posted");
 });
 
-app.get("/addToCart/", ensureLoggedIn(), function(req, res){
-    Cart.find({username: req.user.username}, function(err, cart){
+app.get("/addToCart/:itemName/:qty/:price", ensureLoggedIn(), function(req, res){
+    let title = req.params.itemName,
+    qty = req.params.qty,
+        price = req.params.price;
+    Cart.findOne({username: req.user.username}, function(err, cart){
         console.log(cart);
+        cart.items.push({
+            title, qty
+        });
+        cart.totals += qty * price;
+        cart.save();
+        res.redirect('/shop')
     })
 })
 
